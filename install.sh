@@ -13,13 +13,16 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILLS_DIR="$REPO_DIR/skills"
 ALL_AGENTS=(claude codex cursor grok)
 
-# agent -> "instructions source (repo-relative)|instructions target|skills target dir"
+# Instructions are shared: one root AGENTS.md linked to every agent's expected
+# filename. Per-agent config (settings, hooks) can live in agents/<agent>/ and
+# be added here if an agent ever needs a genuine delta.
+# agent -> "instructions target|skills target dir"
 agent_config() {
   case "$1" in
-    claude) echo "agents/claude/CLAUDE.md|$HOME/.claude/CLAUDE.md|$HOME/.claude/skills" ;;
-    codex)  echo "agents/codex/AGENTS.md|$HOME/.codex/AGENTS.md|$HOME/.codex/skills" ;;
-    cursor) echo "agents/cursor/AGENTS.md|$HOME/.cursor/AGENTS.md|$HOME/.cursor/skills" ;;
-    grok)   echo "agents/grok/GROK.md|$HOME/.grok/GROK.md|$HOME/.grok/skills" ;;
+    claude) echo "$HOME/.claude/CLAUDE.md|$HOME/.claude/skills" ;;
+    codex)  echo "$HOME/.codex/AGENTS.md|$HOME/.codex/skills" ;;
+    cursor) echo "$HOME/.cursor/AGENTS.md|$HOME/.cursor/skills" ;;
+    grok)   echo "$HOME/.grok/GROK.md|$HOME/.grok/skills" ;;
     *)      return 1 ;;
   esac
 }
@@ -60,11 +63,11 @@ install_agent() {
     return 1
   fi
 
-  local instructions_src instructions_dest skills_dest
-  IFS='|' read -r instructions_src instructions_dest skills_dest <<<"$config"
+  local instructions_dest skills_dest
+  IFS='|' read -r instructions_dest skills_dest <<<"$config"
 
   printf '%s\n' "$agent:"
-  link "$REPO_DIR/$instructions_src" "$instructions_dest"
+  link "$REPO_DIR/AGENTS.md" "$instructions_dest"
 
   # Link each skill individually so agent-local skills can coexist.
   mkdir -p "$skills_dest"

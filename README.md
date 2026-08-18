@@ -1,41 +1,37 @@
 # agent-skills
 
-A single, version-controlled home for AI coding agent configuration. One shared
-`skills/` folder is the source of truth for skills; each supported agent gets a
-small folder containing only its provider-specific instructions file. An
-install script symlinks everything into the right place per agent, so editing a
-file here updates every agent at once.
+A single, version-controlled home for AI coding agent configuration. One
+`AGENTS.md` is the shared instructions file for every agent, and one `skills/`
+folder is the source of truth for skills. An install script symlinks both into
+the right place per agent, so editing a file here updates every agent at once.
 
 ## Layout
 
 ```
 agent-skills/
-├── install.sh              # symlinks configs + skills into each agent's home
-├── skills/                 # shared skills (SKILL.md format) — used by ALL agents
-│   └── example-skill/
-│       └── SKILL.md
-└── agents/
-    ├── claude/
-    │   └── CLAUDE.md       # → ~/.claude/CLAUDE.md
-    ├── codex/
-    │   └── AGENTS.md       # → ~/.codex/AGENTS.md
-    ├── cursor/
-    │   └── AGENTS.md       # → ~/.cursor/AGENTS.md
-    └── grok/
-        └── GROK.md         # → ~/.grok/GROK.md
+├── install.sh              # symlinks AGENTS.md + skills into each agent's home
+├── AGENTS.md               # shared instructions — linked to every agent
+└── skills/                 # shared skills (SKILL.md format) — used by ALL agents
+    └── example-skill/
+        └── SKILL.md
 ```
 
-Skills are shared rather than duplicated per agent because the `SKILL.md`
-format (a folder containing a `SKILL.md` with name/description frontmatter) has
-become a de-facto standard across agents. Each skill directory is symlinked
-into every agent's skills directory:
+Instructions are shared rather than duplicated per agent because they'd drift
+the moment one copy is edited and the others aren't. The same goes for skills:
+the `SKILL.md` format (a folder containing a `SKILL.md` with name/description
+frontmatter) has become a de-facto standard across agents. `install.sh` links
+both into each agent's expected locations:
 
-| Agent  | Instructions file      | Skills directory    |
+| Agent  | Instructions symlink   | Skills directory    |
 | ------ | ---------------------- | ------------------- |
 | Claude | `~/.claude/CLAUDE.md`  | `~/.claude/skills/` |
 | Codex  | `~/.codex/AGENTS.md`   | `~/.codex/skills/`  |
 | Cursor | `~/.cursor/AGENTS.md`  | `~/.cursor/skills/` |
 | Grok   | `~/.grok/GROK.md`      | `~/.grok/skills/`   |
+
+If an agent ever needs genuinely agent-specific config (settings, hooks,
+instruction deltas), add an `agents/<agent>/` folder for it then — not
+preemptively.
 
 If an agent needs a skill tweaked or excluded, prefer handling it inside the
 skill itself (frontmatter/description) before forking a per-agent copy.
@@ -75,6 +71,6 @@ up alongside as `<name>.bak.<timestamp>` first.
 
 ## Adding an agent
 
-1. Create `agents/<agent>/` with its instructions file.
-2. Add an entry to the `AGENTS` case block in `install.sh` (instructions file
-   source/target + skills directory target).
+Add an entry to the `agent_config` case block in `install.sh` (instructions
+symlink target + skills directory target). The shared `AGENTS.md` is linked as
+its instructions file automatically.
