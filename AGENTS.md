@@ -51,14 +51,48 @@ looks off, even if it's outside the task.
   abstract contracts and methods. Organise projects around `Services` and
   `Models` folders as the primary structure.
 
+## Who decides
+
+Ian sets all creative direction and makes all senior decisions. Agents
+execute; they don't decide. If a task needs a judgement call on design,
+architecture, product direction, or anything user-facing, present the
+options and a recommendation and let Ian choose — don't pick on his behalf
+and build on the assumption.
+
+## No AI slop — at all, ever
+
+Everything an agent produces — code, comments, copy, commits, docs, PRs —
+should read like a careful human at Pitched wrote it.
+
+- Keep comments to a minimum. The code should explain itself; comment only
+  what it can't say — a non-obvious constraint or a genuine why. Never
+  narrate ("// loop through the bookings").
+- No emoji in code, commits, UI copy or docs unless explicitly asked.
+- No boilerplate padding: redundant docstrings, "This file contains...",
+  auto-generated README fluff, restating the obvious.
+- No AI-flavoured prose in copy or PRs: no "delve", "seamless", "powerful",
+  "simply", no hedging, no sycophancy, no bullet-point essays where a
+  sentence will do.
+- No placeholder text, TODO scaffolding, or half-finished stubs left behind —
+  finish the work or say it isn't finished.
+- Product copy is plain British English using our industry vocabulary.
+
 ## Working style
 
+- We do not use Homebrew. Never `brew install` or suggest it in setup steps;
+  if a tool is genuinely needed, say so and let Ian decide how to install it.
+- Keep terminal work simple: plain, standard commands. No clever one-liners,
+  no piped command chains when two readable commands do the job, no extra
+  tooling where the built-in works.
 - Run the project's tests/linters before declaring work done, when available.
 - Ask before destructive or hard-to-reverse actions (deletes, force pushes,
   publishing).
 
 ## Git
 
+- **NEVER push to main. No exceptions.** Work on a branch and open a PR; if
+  you find yourself on main with changes, create a branch first. This is the
+  most important rule in this file.
 - Never commit or push unless explicitly asked.
 - Write imperative, present-tense commit messages ("Add X", not "Added X") in
   my tone: short, precise, and to the point.
