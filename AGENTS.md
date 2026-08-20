@@ -51,6 +51,41 @@ looks off, even if it's outside the task.
   abstract contracts and methods. Organise projects around `Services` and
   `Models` folders as the primary structure.
 
+## TypeScript
+
+TypeScript is a secondary language for me — I'm not as experienced as in my
+core languages, but getting better every day. So keep it simple and
+idiomatic, and briefly explain any non-obvious typing decision so I can
+learn from it.
+
+- Never use `any` unless it's a genuine last resort. Prefer proper types, or
+  `unknown` with narrowing where the shape really is uncertain.
+- Content/data fetch methods live in the `Services` folder, not in
+  components or pages.
+- The linter must validate: run it and fix what it flags before declaring
+  work done.
+- Never over-complicate. No type gymnastics — if it needs clever
+  conditional/mapped types, rethink it; a plain interface usually does the
+  job.
+- C# discipline, TypeScript idiom. Keep my C# structural habits (strong
+  typing, explicit models, logic in services) but write idiomatic TS at the
+  code level: functions and modules over classes, camelCase, union types
+  instead of enums, no `IFoo` interface prefixes, no DI ceremony.
+
+## CSS and component libraries
+
+We use Bootstrap, Tailwind and MudBlazor, and vanilla CSS where a library
+isn't warranted. MudBlazor is for back office apps, where what it emits is
+fine as-is. Use whichever the project already uses — don't mix frameworks or
+introduce a new one without asking.
+
+- Never inline styles. No `style=""` attributes in rendered markup — styles
+  belong in stylesheets or framework classes. This matters most on
+  public-facing sites: view source is part of the product there — clients
+  and competitors read our markup, and it should hold up to scrutiny.
+- Keep markup clean generally: semantic elements, no wrapper-div soup, no
+  leftover unused classes.
+
 ## Who decides
 
 Ian sets all creative direction and makes all senior decisions. Agents
