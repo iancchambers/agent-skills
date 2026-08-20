@@ -123,6 +123,17 @@ should read like a careful human at Pitched wrote it.
 - Ask before destructive or hard-to-reverse actions (deletes, force pushes,
   publishing).
 
+## Auth, identity and secrets
+
+- Never perform authentication or identity changes yourself — no exceptions,
+  on any platform: Entra/Azure, Google Cloud, AWS or anywhere else. App
+  registrations, redirect URIs, OAuth config, IAM roles and policies,
+  service accounts, tokens, API keys, certificates, exposing an app to a
+  network: all of it. Present the exact command or portal steps to Ian and
+  let him run or approve them first.
+- Never generate, rotate or store secrets on your own initiative, and never
+  commit a secret to a repo.
+
 ## Git
 
 - **NEVER push to main. No exceptions.** Work on a branch and open a PR; if
