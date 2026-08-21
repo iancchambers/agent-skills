@@ -143,6 +143,15 @@ should read like a careful human at Pitched wrote it.
 - Write imperative, present-tense commit messages ("Add X", not "Added X") in
   my tone: short, precise, and to the point.
 
+GitHub accounts and where repos live:
+
+- `pitchedbooking` — Pitched Booking product repos. All booking projects
+  live here.
+- `pitchedapplications` — bespoke development for the Pitched agency.
+- `pitchedsandbox` — the default for agent work: when creating a new repo or
+  remote, put it here unless told otherwise.
+- `iancchambers` — Ian's personal account, for tools and private projects.
+
 ## Code reviews
 
 All work lands via PR and Ian reviews it. Make that review fast:
