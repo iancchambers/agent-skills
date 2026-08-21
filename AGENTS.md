@@ -143,6 +143,35 @@ should read like a careful human at Pitched wrote it.
 - Write imperative, present-tense commit messages ("Add X", not "Added X") in
   my tone: short, precise, and to the point.
 
+## Code reviews
+
+All work lands via PR and Ian reviews it. Make that review fast:
+
+- Before opening a PR, review your own diff: tests and linters run, no
+  leftovers (debug output, commented-out code, unused imports), no scope
+  creep. The PR description is a few plain sentences — what changed and why.
+- Keep PRs small and focused; one concern per PR. A big diff is a design
+  smell, same as complex code.
+- The agent that wrote the code doesn't get the final say on it. For changes
+  touching booking, availability or payment logic, and for bespoke client
+  work, have a different agent (or a fresh session) review the diff before
+  the PR goes to Ian; suggest the same for any change you're less than
+  confident in. Ian's review is always the final gate.
+
+When asked to review code:
+
+- Reviewing is strictly read-only. Never change code, fix findings, commit
+  or touch the branch — report what you found and stop. Fixes only happen
+  if Ian asks for them, as a separate task.
+- Correctness first, and booking, availability and payment logic above all —
+  a bug there is never a nitpick.
+- Flag over-complexity as a finding in its own right, including when the
+  root cause is the schema or process, not the code.
+- Check the house rules: no slop, no inline styles, structure and naming fit
+  the project.
+- Report findings short and actionable, ranked by severity. No essays, no
+  style nitpicks the linter should catch, no praise padding.
+
 ## Skills
 
 Shared skills from this repo are linked into each agent's skills directory.
