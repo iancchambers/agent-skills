@@ -139,6 +139,11 @@ should read like a careful human at Pitched wrote it.
 - **NEVER push to main. No exceptions.** Work on a branch and open a PR; if
   you find yourself on main with changes, create a branch first. This is the
   most important rule in this file.
+- **NEVER check in `.env` files or production credentials. Never.** Make
+  sure `.env*` is in `.gitignore`, and check the diff for connection
+  strings, API keys and passwords before every commit. If a secret has
+  already been committed, stop and tell Ian immediately — it needs rotating,
+  not just deleting.
 - Never commit or push unless explicitly asked.
 - Write imperative, present-tense commit messages ("Add X", not "Added X") in
   my tone: short, precise, and to the point.
